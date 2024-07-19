@@ -115,35 +115,36 @@ export const navLinks = [
   ];
   
   export const transformationTypes = {
-    menuGenerator: {
+    menu: {
       type: "menu",
       title: "Menu Generator",
       subTitle: "Generates unique menu based on dietary preferences",
       config: { menu: true },
       icon: "menu.svg",
     },
-    culinaryCoach: {
+    culinary: {
       type: "culinary",
       title: "Culinary Coach",
       subTitle: "Generates personalized cooking lessons",
       config: { culinary: true },
       icon: "chef.svg",
     },
-    smartLeftovers: {
-      type: "leftover",
+    leftovers: {
+      type: "leftovers", // Corrected from "leftover"
       title: "Smart Leftovers",
       subTitle: "Suggests creative recipes using leftovers",
-      config: { leftover: true },
+      config: { leftovers: true }, // Corrected from "leftover"
       icon: "smart-leftover.svg",
     },
-    cookingAssistant: {
+    assistant: {
       type: "assistant",
       title: "Cooking Assistant",
       subTitle: "Virtual cooking assistant that provides real-time, step-by-step guidance during cooking",
-      config: {assistant: true},
+      config: { assistant: true },
       icon: "scan.svg",
     },
   };
+  
   
   export const aspectRatioOptions = {
     "1:1": {
