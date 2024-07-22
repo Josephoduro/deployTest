@@ -1,4 +1,4 @@
-
+// components/ui/DialogTab.tsx
 "use client";
 
 import {
@@ -22,7 +22,7 @@ const DialogTab: React.FC<DialogTabProps> = ({ isOpen, onClose, meal }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl h-auto p-4">
+      <DialogContent className="max-w-4xl h-auto max-h-[80vh] overflow-y-auto p-4">
         <DialogHeader>
           <DialogTitle>{meal.strMeal}</DialogTitle>
           <DialogDescription>{meal.strCategory}</DialogDescription>
@@ -34,6 +34,7 @@ const DialogTab: React.FC<DialogTabProps> = ({ isOpen, onClose, meal }) => {
             <p>{meal.strInstructions}</p>
           </div>
         </div>
+        
       </DialogContent>
     </Dialog>
   );
