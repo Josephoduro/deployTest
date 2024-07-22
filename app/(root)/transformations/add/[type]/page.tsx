@@ -58,7 +58,7 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
         title='Menu Generator'
         subtitle='Generates unique menu based on dietary preferences'
       />
-    <Carousel className="flex items-center mt-4 mb-4">
+   {/* <Carousel className="flex items-center mt-4 mb-4">
         <CarouselContent className="flex items-center">
           <CarouselItem className="md:basis-1/2 lg:basis-1/3">
           <AlertDialog>
@@ -182,9 +182,9 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
         </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
-    </Carousel>
+    </Carousel>*/}
 
-    <Card>
+    <Card className='mt-5'>
         <CardHeader>
           <CardTitle>Don’t know what to eat yet?</CardTitle>
              <CardDescription className='mt-2'>Get a personalized dining experience where a menu is specifically tailored to meet your individual preferences, <br></br> dietary needs, or special requests.</CardDescription>

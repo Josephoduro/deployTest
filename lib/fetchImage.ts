@@ -1,4 +1,4 @@
-// utils/fetchImages.ts
+
 import axios from 'axios';
 
 const UNSPLASH_ACCESS_KEY = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
