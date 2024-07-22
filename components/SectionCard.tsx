@@ -16,7 +16,7 @@ const SectionCard: React.FC<SectionCardProps> = ({ title, description, icon }) =
   };
 
   return (
-    <div onClick={handleClick} className="bg-gray-300 p-4 rounded-lg mb-4 hover:cursor-pointer">
+    <div className="bg-gray-300 p-4 rounded-lg mb-4 hover:cursor-pointer">
       <div className="flex items-center mb-2">
         <span className="text-xl">{icon}</span>
         <h2 className="text-xl font-semibold ml-2">{title}</h2>

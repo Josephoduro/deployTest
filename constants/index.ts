@@ -11,17 +11,17 @@ export const navLinks = [
     },
     {
       label: "Cooking Assistant",
-      route: "/transformations/add/assistant",
+      route: "/other",
       icon: "/assets/icons/cooking-assistant.svg",
     },
     {
       label: "Smart Leftovers",
-      route: "/transformations/add/leftovers",
+      route: "/coach",
       icon: "/assets/icons/smart-leftover.svg",
     },
     {
       label: "Culinary Coach",
-      route: "/transformations/add/culinary",
+      route: "/assistant",
       icon: "/assets/icons/chef.svg",
     },
     {

@@ -1,63 +1,47 @@
-"use client"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import React from 'react'
-import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+"use client";
+
+import { useRouter } from 'next/navigation'; 
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const formSchema = z.object({
-    username: z.string().min(2).max(50),
-})
+  ingredient: z.string(),
+});
 
 const TransformationForm = () => {
-     // 1. Define your form.
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      ingredient: '',
     },
-  })
- 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
-  }
-  return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
-  )
-}
+  });
 
-export default TransformationForm
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    // Redirect to the results page with the ingredient as a query parameter
+    router.push(`/results?ingredients=${encodeURIComponent(values.ingredient)}`);
+  };
+
+  return (
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <div>
+        <Input
+          id="ingredient"
+          placeholder="What ingredients do you want from the meal?"
+          {...form.register('ingredient')}
+          className="mt-1 block w-full"
+        />
+      </div>
+      <Button type="submit" className="mt-4">
+        Submit
+      </Button>
+    </form>
+  );
+};
+
+export default TransformationForm;
