@@ -75,7 +75,6 @@ const ResultsPage = () => {
             <Card key={meal.idMeal} className="shadow-lg">
               <CardHeader>
                 <CardTitle>{meal.strMeal}</CardTitle>
-                <CardDescription>Category: {meal.strCategory}</CardDescription>
               </CardHeader>
               <CardContent>
                 <img
@@ -83,7 +82,6 @@ const ResultsPage = () => {
                   alt={meal.strMeal}
                   className="w-full h-40 object-cover mb-4"
                 />
-                <p>Click below to view the recipe.</p>
               </CardContent>
               <CardFooter>
                 <Button onClick={() => handleViewRecipe(meal.idMeal)} className="bg-purple-gradient text-white p-2">
