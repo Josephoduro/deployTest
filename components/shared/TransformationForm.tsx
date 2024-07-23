@@ -32,13 +32,13 @@ const TransformationForm = () => {
       <div>
         <Input
           id="ingredient"
-          placeholder="What ingredients do you want from the meal?"
+          placeholder="Search for meals by ingredient"
           {...form.register('ingredient')}
           className="mt-1 block w-full"
         />
       </div>
-      <Button type="submit" className="mt-4">
-        Submit
+      <Button type="submit" className="bg-purple-gradient text-white p-2 mt-4">
+        Generate Meals
       </Button>
     </form>
   );

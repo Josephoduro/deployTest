@@ -187,14 +187,12 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
     <Card className='mt-5'>
         <CardHeader>
           <CardTitle>Don’t know what to eat yet?</CardTitle>
-             <CardDescription className='mt-2'>Get a personalized dining experience where a menu is specifically tailored to meet your individual preferences, <br></br> dietary needs, or special requests.</CardDescription>
+             <CardDescription className='mt-2'>Discover delicious meals by selecting a main ingredient. Let us provide you with a curated list of meal options tailored to your taste.</CardDescription>
         </CardHeader>
         <CardContent>
         <Dialog>
         <DialogTrigger className='mt-1 bg-purple-gradient text-white p-2 rounded-md'>
-          
             Get Started
-        
         </DialogTrigger>
         <DialogContent>
     <DialogHeader>
