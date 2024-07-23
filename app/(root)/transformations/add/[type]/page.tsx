@@ -41,6 +41,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import MealsWithAI from '@/components/shared/MealsWithAI';
 
 
 
@@ -184,7 +185,7 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
       <CarouselNext />
     </Carousel>
 
-    <Card className='mt-5'>
+    <Card className='mt-5 mb-10'>
         <CardHeader>
           <CardTitle>Don’t know what to eat yet?</CardTitle>
              <CardDescription className='mt-2'>Discover delicious meals by selecting a main ingredient. Let us provide you with a curated list of meal options tailored to your taste.</CardDescription>
@@ -206,9 +207,7 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
         </CardContent>
         
     </Card>
-
-
-      
+    <MealsWithAI/>
     </>
   );
 };
