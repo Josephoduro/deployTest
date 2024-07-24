@@ -1,5 +1,14 @@
 import React from 'react';
 import { Button } from '../ui/button';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  } from "@/components/ui/dialog"
+import MealGenForm from './MealGenForm';
 
 const MealsWithAI: React.FC = () => {
   return (
@@ -12,13 +21,23 @@ const MealsWithAI: React.FC = () => {
         />
       </div>
       <div className="md:w-1/2 md:pl-6 mt-4 md:mt-0">
-        <h2 className="text-3xl font-bold mb-4">Plan your meals with AI</h2>
+        <h3 className="text-3xl font-bold mb-4">Plan your meals with AI</h3>
         <p className="text-lg mb-4">
           Have specific dietary restrictions and need personalized meals? Let our AI engine create a customized list of meal options just for you.
         </p>
-        <Button className='mt-1 bg-purple-gradient text-white p-2 rounded-md'>
+        <Dialog>
+        <DialogTrigger className='mt-1 bg-purple-gradient text-white p-2 rounded-md'>
             Get Started
-        </Button>
+        </DialogTrigger>
+        <DialogContent>
+    <DialogHeader>
+      <DialogTitle className='mb-4'>Describe what you want to eat</DialogTitle>
+      <DialogDescription>
+        <MealGenForm/>
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

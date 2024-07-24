@@ -1,14 +1,16 @@
 "use client";
 import React from 'react'
-import { z } from "zod"
- 
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-})
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from '../ui/button';
+
 
 const MealGenForm = () => {
   return (
-    <div>MealGenForm</div>
+    <div className="grid w-full gap-2">
+      <Textarea />
+      <Button className='mt-1 bg-purple-gradient text-white p-2 rounded-md'>Generate Meals</Button>
+    </div>
+
   )
 }
 
