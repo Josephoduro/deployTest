@@ -31,7 +31,6 @@ const MealsWithAI: React.FC = () => {
         </DialogTrigger>
         <DialogContent>
     <DialogHeader>
-      <DialogTitle className='mb-4'>Describe what you want to eat</DialogTitle>
       <DialogDescription>
         <MealGenForm/>
       </DialogDescription>
