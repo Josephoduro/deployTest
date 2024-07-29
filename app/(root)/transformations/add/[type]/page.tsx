@@ -197,7 +197,7 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
         </DialogTrigger>
         <DialogContent>
     <DialogHeader>
-      <DialogTitle>Complete Form to Generate Menu</DialogTitle>
+      <DialogTitle className='mt-3 mb-3'>Search for Meals by Ingredient</DialogTitle>
       <DialogDescription>
         <TransformationForm/>
       </DialogDescription>
@@ -205,7 +205,6 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
   </DialogContent>
         </Dialog>
         </CardContent>
-        
     </Card>
     <MealsWithAI/>
     </>

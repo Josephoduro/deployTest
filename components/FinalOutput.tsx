@@ -1,92 +1,54 @@
-import React, { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { PositionInfo } from "@/hooks/userCrewJob";
+"use client";
+import { useEffect, useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 
-interface FinalOutputProps {
-  positionInfoList: PositionInfo[];
-}
+type NameCalorie = {
+  ingredients: string;
+  calorie: string;
+};
 
-export const FinalOutput: React.FC<FinalOutputProps> = ({ positionInfoList }) => {
-  const [selectedCuisine, setSelectedCuisine] = useState<PositionInfo | null>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+type PositionInfo = {
+  Dish: string;
+  Ingredients: string;
+  Recipe: string;
+  Total_Calories: NameCalorie[];
+};
 
-  const openDialog = (cuisine: PositionInfo) => {
-    setSelectedCuisine(cuisine);
-    setIsDialogOpen(true);
-  };
+export default function FinalOutput() {
+  const [positionInfoList, setPositionInfoList] = useState<PositionInfo[]>([]);
 
-  const closeDialog = () => {
-    setSelectedCuisine(null);
-    setIsDialogOpen(false);
-  };
-
-  // Function to format ingredients and recipes into a list
-  const formatList = (text: string | string[] | undefined) => {
-    if (Array.isArray(text)) {
-      return text.map((item, index) => (
-        <li key={index} className="list-disc pl-5">{item.trim()}</li>
-      ));
+  useEffect(() => {
+    const data = localStorage.getItem("menuData");
+    if (data) {
+      try {
+        const parsedData = JSON.parse(data);
+        setPositionInfoList(parsedData);
+      } catch (error) {
+        console.error("Failed to parse menuData from localStorage:", error);
+      }
     }
-
-    if (typeof text === "string") {
-      return text.split(',').map((item, index) => (
-        <li key={index} className="list-disc pl-5">{item.trim()}</li>
-      ));
-    }
-
-    return [];
-  };
+  }, []);
 
   return (
-    <div className="flex flex-col h-full max-w-4xl mx-auto p-4">
-      <h2 className="text-lg font-semibold mb-4">Menu Generated</h2>
-      <div className="flex-grow overflow-y-auto border-2 border-gray-300 p-4 rounded-lg bg-white shadow-md">
-        {positionInfoList.length === 0 ? (
-          <p className="text-center text-gray-500">No Menu Created yet.</p>
-        ) : (
-          positionInfoList.map((cuisine, index) => (
-            <div
-              key={index}
-              className="mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
-              onClick={() => openDialog(cuisine)}
-            >
-              <p className="font-semibold text-gray-700">
-                <strong>Dish:</strong> {cuisine.Dish}
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6">Your Generated Menu</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {positionInfoList.map((position, index) => (
+          <Card key={index} className="shadow-lg">
+            <CardContent>
+              <h2 className="text-xl font-semibold mb-2">{position.Dish}</h2>
+              <p><strong>Ingredients:</strong> {position.Ingredients}</p>
+              <p><strong>Recipe:</strong> {position.Recipe}</p>
+              <p>
+                <strong>Total Calories:</strong> 
+                {Array.isArray(position.Total_Calories)
+                  ? position.Total_Calories.map((item) => `${item.ingredients}: ${item.calorie}`).join(", ")
+                  : "N/A"}
               </p>
-              <p className="text-gray-600">
-                <strong>Ingredients:</strong> {cuisine.Ingredients}
-              </p>
-              <p className="text-gray-600">
-                <strong>Recipe:</strong> {cuisine.Recipe}
-              </p>
-            </div>
-          ))
-        )}
+            </CardContent>
+          </Card>
+        ))}
       </div>
-
-      <Dialog open={isDialogOpen} onOpenChange={closeDialog}>
-        <DialogContent className="max-w-4xl h-auto max-h-[80vh] overflow-y-auto p-4">
-          {selectedCuisine && (
-            <>
-              <DialogHeader>
-                <DialogTitle>{selectedCuisine.Dish || 'Dish'}</DialogTitle>
-              </DialogHeader>
-              <div>
-                <h3 className="font-bold text-lg">Ingredients</h3>
-                <ul>
-                  {formatList(selectedCuisine.Ingredients)}
-                </ul>
-                <h3 className="font-bold text-lg mt-4">Recipe</h3>
-                <ul>
-                  {formatList(selectedCuisine.Recipe)}
-                </ul>
-              </div>
-              <Button onClick={closeDialog} className="bg-purple-gradient text-white mt-4">Close</Button>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
-};
+}

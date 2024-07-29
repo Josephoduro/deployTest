@@ -12,7 +12,7 @@ import MealGenForm from './MealGenForm';
 
 const MealsWithAI: React.FC = () => {
   return (
-    <div className="relative bg-purple-100 p-6 flex flex-col md:flex-row items-center justify-between">
+    <div className="relative rounded-lg border bg-card text-card-foreground shadow-sm p-6 flex flex-col md:flex-row items-center justify-between">
       <div className="md:w-1/2">
         <img
           src="/assets/images/plan-meals-with-ai.jpg"
@@ -30,11 +30,7 @@ const MealsWithAI: React.FC = () => {
             Get Started
         </DialogTrigger>
         <DialogContent>
-    <DialogHeader>
-      <DialogDescription>
         <MealGenForm/>
-      </DialogDescription>
-    </DialogHeader>
   </DialogContent>
         </Dialog>
       </div>
