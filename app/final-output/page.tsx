@@ -1,10 +1,9 @@
 'use client';
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger, DialogClose, DialogFooter } from "@/components/ui/dialog";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
 import { fetchImages } from '@/lib/menuImage';
-import Spinner from "@/components/shared/Spinner";
 
 type NameCalorie = {
   ingredients: string;
@@ -24,29 +23,28 @@ const FinalOutputCard: React.FC<{ position: PositionInfo, onClick: () => void }>
 
   useEffect(() => {
     const fetchImage = async () => {
-      if (position.Dish) {
-        setLoading(true);
-        const image = await fetchImages(position.Dish);
-        setImageSrc(image);
-        setLoading(false);
-      }
+      const dishWords = position.Dish.split(' ');
+      const lastTwoWords = dishWords.slice(-2).join(' ');
+      const image = await fetchImages(lastTwoWords);
+      setImageSrc(image || '');
+      setLoading(false);
     };
 
     fetchImage();
   }, [position.Dish]);
 
   return (
-    <Card className="shadow-lg cursor-pointer transition-transform transform hover:scale-105" onClick={onClick}>
+    <Card className="shadow-lg cursor-pointer transition-transform transform hover:scale-105 hover:shadow-xl duration-300 ease-in-out" onClick={onClick}>
       {loading ? (
-        <div className="w-full h-40 flex items-center justify-center">
-          <Spinner />
+        <div className="w-full h-40 flex items-center justify-center bg-gray-100 rounded-t-md">
+          <div className="w-12 h-12 border-4 border-purple-300 border-t-transparent rounded-full animate-spin"></div> {/* Spinner */}
         </div>
       ) : imageSrc ? (
-        <img className="w-full h-40 object-cover" src={imageSrc} alt={position.Dish} />
+        <img className="w-full h-40 object-cover rounded-t-md" src={imageSrc} alt={position.Dish} />
       ) : (
-        <div className="w-full h-40 flex items-center justify-center text-gray-500">No Image Available</div>
+        <div className="w-full h-40 flex items-center justify-center bg-gray-100 text-gray-500 rounded-t-md">No Image Available</div>
       )}
-      <CardHeader className="p-4">
+      <CardHeader className="p-4 bg-gray-800 text-white rounded-b-md">
         <CardTitle className="text-lg font-semibold">{position.Dish}</CardTitle>
       </CardHeader>
       <CardContent className="p-4">
@@ -80,9 +78,11 @@ export default function FinalOutput() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Your Generated Menu</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <div className="container mx-auto p-6">
+      <h1 className="text-5xl font-extrabold text-white bg-gradient-to-r from-purple-600 via-purple-700 to-purple-800 text-center py-6 rounded-lg shadow-xl mb-8">
+        Your Generated Menu
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {positionInfoList.map((position, index) => (
           <FinalOutputCard
             key={index}
@@ -93,18 +93,18 @@ export default function FinalOutput() {
       </div>
 
       {selectedDish && (
-        <Dialog  open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="p-4">
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} >
+          <DialogContent className="bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto">
             <DialogHeader>
-              <DialogTitle className="text-2xl font-semibold">{selectedDish.Dish}</DialogTitle>
-              <DialogDescription className="mt-2 text-sm">
+              <DialogTitle className="text-3xl font-bold">{selectedDish.Dish}</DialogTitle>
+              <DialogDescription className="mt-2 text-lg">
                 <p><strong>Ingredients:</strong> {selectedDish.Ingredients}</p>
-                <p className="mt-1"><strong>Recipe:</strong> {selectedDish.Recipe}</p>
+                <p className="mt-2"><strong>Recipe:</strong> {selectedDish.Recipe}</p>
               </DialogDescription>
             </DialogHeader>
-            <DialogFooter>
+            <DialogFooter className="mt-4 flex justify-end">
               <DialogClose asChild>
-                <Button>Close</Button>
+                <Button className="bg-purple-600 text-white hover:bg-purple-700">Close</Button>
               </DialogClose>
             </DialogFooter>
           </DialogContent>
